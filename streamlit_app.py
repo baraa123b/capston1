@@ -11,7 +11,7 @@ from PIL import Image, ImageDraw, ImageFont
 import streamlit as st
 
 # Step 1: Load the image
-image = Image.open("images/SADA.png")  # Ensure the image path is correct
+image = Image.open("SADA.png")  # Ensure the image path is correct
 draw = ImageDraw.Draw(image)
 
 # Step 2: Get image dimensions
