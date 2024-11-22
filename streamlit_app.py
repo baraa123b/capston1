@@ -8,7 +8,6 @@ from PIL import Image
 #st.image(image_url,use_column_width=True)
 
 from PIL import Image, ImageDraw, ImageFont
-import streamlit as st
 
 # Step 1: Load the image
 image = Image.open("SADA.png")  # Ensure the image path is correct
@@ -25,10 +24,10 @@ x_position = img_width // 2  # X Position (centered horizontally)
 y_position = img_height // 2  # Y Position (centered vertically)
 
 # Step 4: Set font (ensure the font is available on your system)
-#try:
-#    font = ImageFont.truetype("arial.ttf", font_size)  # Use Arial font, you can replace it with another font if needed
-#except IOError:
-#    font = ImageFont.load_default()  # Use default font if Arial is not available
+try:
+   font = ImageFont.truetype("arial.ttf", font_size)  # Use Arial font, you can replace it with another font if needed
+except IOError:
+    font = ImageFont.load_default()  # Use default font if Arial is not available
 
 # Step 5: Convert hex color to RGB
 hex_color = font_color.lstrip('#')
