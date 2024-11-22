@@ -6,9 +6,8 @@ from PIL import Image
 
 import streamlit as st
 
-# Relative path to the image inside the 'images' folder
-image_path = "images/SADA.png"  # Use the path relative to your script
+# URL to the image on GitHub
+image_url = "https://raw.githubusercontent.com/username/repository/main/images/SADA.png"
 
 # Display the image
-st.image(image_path, caption="This is SADA!", use_column_width=True)
-
+st.image(image_url, caption="This is SADA!", use_column_width=True)
