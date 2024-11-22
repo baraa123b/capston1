@@ -14,16 +14,16 @@ from PIL import Image, ImageDraw, ImageFont
 def home_page():
     st.title("Welcome to SADA")
 
-    # Load image
+    # Load the image
     image = Image.open("SADA.png")  # Ensure the image path is correct
     draw = ImageDraw.Draw(image)
 
-    # Define text to be written on the image
+    # Define the text to be written on the image
     text = "Made with love"
     font_color = "white"  # White color for the text
     font_size = 40  # Font size for the text
 
-    # Set font (ensure it's available)
+    # Set the font (ensure it's available)
     try:
         font = ImageFont.truetype("arial.ttf", font_size)
     except IOError:
@@ -38,7 +38,7 @@ def home_page():
     # Draw the text on the image
     draw.text((x_position, y_position), text, font=font, fill=font_color)
 
-    # Display the image with text
+    # Display the image with the caption
     st.image(image, caption="SADA", use_column_width=True)
 
     # Add "Sign In" and "Sign Up" buttons
@@ -68,10 +68,11 @@ def sign_up_page():
 
 # Main function to manage pages and navigation
 def main():
+    # Initialize session state if it's not set yet
     if 'page' not in st.session_state:
         st.session_state.page = "Home"  # Default to home page when first loading
     
-    # Sidebar navigation or page logic based on session state
+    # Show the correct page based on session state
     if st.session_state.page == "Home":
         home_page()
     elif st.session_state.page == "Sign In":
@@ -81,4 +82,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
