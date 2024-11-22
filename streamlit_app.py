@@ -1,7 +1,5 @@
 import streamlit as st
 from PIL import Image
-#st.title('SADA APP')
-#st.write('Hello world!')
 
 # URL to the image on GitHub
 #image_url = "SADA.png"
@@ -9,37 +7,38 @@ from PIL import Image
 # Display the image
 #st.image(image_url,use_column_width=True)
 
-
 from PIL import Image, ImageDraw, ImageFont
+import streamlit as st
 
-
-# Load the image
-image = Image.open("SADA.png")
+# Step 1: Load the image
+image = Image.open("images/SADA.png")  # Ensure the image path is correct
 draw = ImageDraw.Draw(image)
 
-# Get image dimensions
+# Step 2: Get image dimensions
 img_width, img_height = image.size
 
-# Add text input and color picker for position and color
-text = st.text_input("Enter text:", "This is SADA!")
-font_color = st.color_picker("Pick a text color", "#FF0000")  # Default Red
-font_size = st.slider("Font Size", 10, 100, 50)  # Adjust font size
-x_position = st.slider("X Position", 0, img_width, img_width // 2)  # Horizontal position
-y_position = st.slider("Y Position", 0, img_height, img_height // 2)  # Vertical position
+# Step 3: Define static values for text, color, font size, and position
+text = "This is SADA!"  # Static text to overlay
+font_color = "#FF5733"  # Static color in hex format
+font_size = 50  # Static font size
+x_position = img_width // 2  # X Position (centered horizontally)
+y_position = img_height // 2  # Y Position (centered vertically)
 
-# Set font
-try:
-    font = ImageFont.truetype("arial.ttf", font_size)
-except IOError:
-    font = ImageFont.load_default()
+# Step 4: Set font (ensure the font is available on your system)
+#try:
+#    font = ImageFont.truetype("arial.ttf", font_size)  # Use Arial font, you can replace it with another font if needed
+#except IOError:
+#    font = ImageFont.load_default()  # Use default font if Arial is not available
 
-# Convert hex color to RGB
+# Step 5: Convert hex color to RGB
 hex_color = font_color.lstrip('#')
 font_color_rgb = tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
 
-# Draw text on image
+# Step 6: Draw the text on the image
 draw.text((x_position, y_position), text, fill=font_color_rgb, font=font)
 
+# Step 7: Display the modified image
+st.image(image, use_column_width=True)
 
 
 
