@@ -4,10 +4,8 @@ from PIL import Image
 
 #st.write('Hello world!')
 
-import streamlit as st
-
 # URL to the image on GitHub
-image_url = "https://raw.githubusercontent.com/username/repository/main/images/SADA.png"
+image_url = "SADA.png"
 
 # Display the image
-st.image(image_url, caption="This is SADA!", use_column_width=True)
+st.image(image_url,use_column_width=True)
