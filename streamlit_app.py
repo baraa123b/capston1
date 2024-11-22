@@ -10,57 +10,75 @@ from PIL import Image
 import streamlit as st
 from PIL import Image, ImageDraw, ImageFont
 
-# Function for Page 1
-def page_1():
-    st.title("Page 1: Image with Text Overlay")
-    
-    # Load image and overlay text (same as before)
-    image = Image.open("SADA.png")  # Replace with your image path
+# Function for Home Page
+def home_page():
+    st.title("Welcome to SADA")
+
+    # Load image
+    image = Image.open("SADA.png")  # Ensure the image path is correct
     draw = ImageDraw.Draw(image)
-    
-    text = "This is SADA!"  # Static text to overlay
-    font_color = "#FF5733"  # Text color
-    font_size = 50  # Font size
-    
+
+    # Define text to be written on the image
+    text = "Made with love"
+    font_color = "white"  # White color for the text
+    font_size = 40  # Font size for the text
+
     # Set font (ensure it's available)
     try:
-        font = ImageFont.truetype("arial.ttf", font_size)  # Use Arial font
+        font = ImageFont.truetype("arial.ttf", font_size)
     except IOError:
-        font = ImageFont.load_default()  # Default font if Arial not available
-    
+        font = ImageFont.load_default()
+
+    # Calculate text width and height to center it at the bottom
     text_width, text_height = draw.textsize(text, font=font)
-    
-    # Center the text
-    x_position = (image.width - text_width) // 2
-    y_position = (image.height - text_height) // 2
-    
-    # Draw text on the image
-    font_color_rgb = tuple(int(font_color[i:i+2], 16) for i in (0, 2, 4))  # Convert hex to RGB
-    draw.text((x_position, y_position), text, fill=font_color_rgb, font=font)
-    
-    # Display the image
-    st.image(image, caption="Image with Text Overlay", use_column_width=True)
+    img_width, img_height = image.size
+    x_position = (img_width - text_width) // 2  # Center horizontally
+    y_position = img_height - text_height - 10  # Position near the bottom
 
-# Function for Page 2
-def page_2():
-    st.title("Page 2: Custom Content")
-    st.write("This is the second page of the app. You can add other content here.")
-    # Add custom content for page 2
+    # Draw the text on the image
+    draw.text((x_position, y_position), text, font=font, fill=font_color)
 
-# Main function to handle navigation
+    # Display the image with text
+    st.image(image, caption="SADA", use_column_width=True)
+
+    # Add "Sign In" and "Sign Up" buttons
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        if st.button("Sign In", key="sign_in"):
+            st.session_state.page = "Sign In"  # Set session state to track page
+            st.experimental_rerun()  # Rerun to switch page
+
+    with col2:
+        if st.button("Sign Up", key="sign_up"):
+            st.session_state.page = "Sign Up"  # Set session state to track page
+            st.experimental_rerun()  # Rerun to switch page
+
+# Function for Sign In Page
+def sign_in_page():
+    st.title("Sign In Page")
+    st.write("This is where users can sign in.")
+    # Add additional sign-in form elements here (e.g., email, password, etc.)
+
+# Function for Sign Up Page
+def sign_up_page():
+    st.title("Sign Up Page")
+    st.write("This is where users can sign up.")
+    # Add additional sign-up form elements here (e.g., email, password, etc.)
+
+# Main function to manage pages and navigation
 def main():
-    # Sidebar navigation
-    st.sidebar.title("Navigation")
-    page = st.sidebar.radio("Select a Page", ["Home", "Page 1", "Page 2"])
+    if 'page' not in st.session_state:
+        st.session_state.page = "Home"  # Default to home page when first loading
     
-    # Display page content based on the selected option
-    if page == "Home":
-        st.title("Welcome to the Home Page")
-        st.write("This is the home page of the Streamlit app.")
-    elif page == "Page 1":
-        page_1()
-    elif page == "Page 2":
-        page_2()
+    # Sidebar navigation or page logic based on session state
+    if st.session_state.page == "Home":
+        home_page()
+    elif st.session_state.page == "Sign In":
+        sign_in_page()
+    elif st.session_state.page == "Sign Up":
+        sign_up_page()
 
 if __name__ == "__main__":
     main()
+
