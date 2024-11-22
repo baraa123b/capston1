@@ -4,11 +4,9 @@ from PIL import Image
 
 #st.write('Hello world!')
 
-# Title
-#st.title("Display Local Image")
+import streamlit as st
 
-# Display the image from your desktop
-image_path = "C:\Users\best\Desktop\SADA.png"  # Replace with your image path
+# Correct file path as a raw string
+image_path = r"C:\Users\best\Desktop\SADA.png"
 st.image(image_path, caption="This is SADA!", use_column_width=True)
-
 
