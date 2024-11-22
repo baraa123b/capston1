@@ -4,37 +4,45 @@ from PIL import Image
 #st.write('Hello world!')
 
 # URL to the image on GitHub
-image_url = "SADA.png"
+#image_url = "SADA.png"
 
 # Display the image
-st.image(image_url,use_column_width=True)
+#st.image(image_url,use_column_width=True)
 
-import streamlit as st
+
 from PIL import Image, ImageDraw, ImageFont
 
-# URL to the image on GitHub (replace with your own)
-image_url = "SADA.png"
 
-# Open the image from the URL using PIL
-image = Image.open("SADA.png")
-
-# Create a draw object to add text
+# Load the image
+image = Image.open("images/SADA.png")
 draw = ImageDraw.Draw(image)
 
-# Specify the font and size
+# Get image dimensions
+img_width, img_height = image.size
+
+# Add text input and color picker for position and color
+text = st.text_input("Enter text:", "This is SADA!")
+font_color = st.color_picker("Pick a text color", "#FF0000")  # Default Red
+font_size = st.slider("Font Size", 10, 100, 50)  # Adjust font size
+x_position = st.slider("X Position", 0, img_width, img_width // 2)  # Horizontal position
+y_position = st.slider("Y Position", 0, img_height, img_height // 2)  # Vertical position
+
+# Set font
 try:
-    font = ImageFont.truetype("arial.ttf", 50)  # Use a system font (you may need to adjust the font)
+    font = ImageFont.truetype("arial.ttf", font_size)
 except IOError:
-    font = ImageFont.load_default()  # Default font if specific one not found
+    font = ImageFont.load_default()
 
-# Set the text, color, and position
-text = "This is SADA!"
-font_color = (255, 0, 0)  # Red color for the text
-position = (100, 100)  # Position (x, y) where the text should be placed
+# Convert hex color to RGB
+hex_color = font_color.lstrip('#')
+font_color_rgb = tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
 
-# Add the text to the image
-draw.text(position, text, fill=font_color, font=font)
+# Draw text on image
+draw.text((x_position, y_position), text, fill=font_color_rgb, font=font)
 
-# Display the image in Streamlit with the text overlay
+# Display image
 st.image(image, caption="Image with Text Overlay", use_column_width=True)
+
+
+
 
