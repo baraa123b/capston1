@@ -1,0 +1,4 @@
+Capston1/
+├── streamlit_app.py
+├── images/        <-- Create this folder
+    └── SADA.png  <-- Place your image here
