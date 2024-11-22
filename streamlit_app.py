@@ -14,7 +14,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 
 # Load the image
-image = Image.open("images/SADA.png")
+image = Image.open("SADA.png")
 draw = ImageDraw.Draw(image)
 
 # Get image dimensions
@@ -39,9 +39,6 @@ font_color_rgb = tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
 
 # Draw text on image
 draw.text((x_position, y_position), text, fill=font_color_rgb, font=font)
-
-# Display image
-st.image(image, caption="Image with Text Overlay", use_column_width=True)
 
 
 
