@@ -7,6 +7,6 @@ from PIL import Image
 import streamlit as st
 
 # Correct file path as a raw string
-image_path = r"C:\Users\best\Desktop\SADA.png"
+image_path = "SADA.png"
 st.image(image_path, caption="This is SADA!", use_column_width=True)
 
